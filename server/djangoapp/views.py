@@ -49,12 +49,14 @@ def registration(request):
         User.objects.get(username=username)
         username_exist = True
     except User.DoesNotExist:
-        logger.debug(f"{username} is a new user")
+        logger.debug(
+            f"{username} is a new user"
+        )
 
     if not username_exist:
         user = User.objects.create_user(
-            username=username, first_name=first_name, last_name=last_name,
-            password=password, email=email
+            username=username, first_name=first_name,
+            last_name=last_name, password=password, email=email
         )
         login(request, user)
         data = {"userName": username, "status": "Authenticated"}
